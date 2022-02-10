@@ -58,5 +58,5 @@ jobs:
         branch: ${{ github.ref }}
 
     - run:
-        name: Upload coverage to Codecov
-        command: bash <(curl -s https://codecov.io/bash)
+      name: Upload coverage to Codecov
+      command: bash <(curl -s https://codecov.io/bash)
