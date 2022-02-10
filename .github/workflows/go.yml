@@ -33,14 +33,14 @@ jobs:
     - name: Test
       run: |
         go test -v -cover ./... -coverprofile coverage.out -coverpkg ./...
-        go tool cover -func coverage.out -o coverage.out
+        go tool cover -func coverage.out -o coverage2.out
 
     - name: Go Coverage Badge
       uses: tj-actions/coverage-badge-go@v1
       if: ${{ runner.os == 'Linux' && matrix.go == '1.17' }}
       with:
         green: 80
-        filename: coverage.out
+        filename: coverage2.out
 
     - uses: stefanzweifel/git-auto-commit-action@v4
       id: auto-commit-action
@@ -56,3 +56,7 @@ jobs:
       with:
         github_token: ${{ github.token }}
         branch: ${{ github.ref }}
+
+    - run:
+        name: Upload coverage to Codecov
+        command: bash <(curl -s https://codecov.io/bash)
